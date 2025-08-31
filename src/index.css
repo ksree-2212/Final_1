@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smart Agriculture PWA Design System - Earth tones and farmer-friendly colors */
+
+@layer base {
+  :root {
+    /* Base colors - warm, natural tones */
+    --background: 42 100% 98%;
+    --foreground: 25 20% 15%;
+
+    /* Card system */
+    --card: 0 0% 100%;
+    --card-foreground: 25 20% 15%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 25 20% 15%;
+
+    /* Primary - Agricultural green */
+    --primary: 120 45% 35%;
+    --primary-foreground: 0 0% 98%;
+    --primary-light: 120 40% 45%;
+    --primary-glow: 120 50% 55%;
+
+    /* Secondary - Earth brown */
+    --secondary: 25 35% 85%;
+    --secondary-foreground: 25 20% 15%;
+    --secondary-dark: 25 45% 25%;
+
+    /* Muted tones */
+    --muted: 45 20% 92%;
+    --muted-foreground: 25 15% 45%;
+
+    /* Accent - Warm orange for highlights */
+    --accent: 35 75% 65%;
+    --accent-foreground: 0 0% 98%;
+    --accent-light: 35 65% 75%;
+
+    /* Status colors */
+    --success: 120 60% 40%;
+    --success-foreground: 0 0% 98%;
+    --warning: 45 90% 55%;
+    --warning-foreground: 25 20% 15%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Soil health colors */
+    --soil-excellent: 120 60% 40%;
+    --soil-good: 120 50% 50%;
+    --soil-fair: 45 80% 55%;
+    --soil-poor: 0 75% 55%;
+
+    /* Interactive elements */
+    --border: 25 20% 88%;
+    --input: 25 15% 92%;
+    --ring: 120 45% 35%;
+
+    --radius: 0.75rem;
+
+    /* Voice interface */
+    --voice-active: 120 60% 50%;
+    --voice-inactive: 25 15% 70%;
+    --voice-pulse: 120 70% 55%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-earth: linear-gradient(180deg, hsl(var(--background)), hsl(var(--secondary)));
+    --gradient-soil: linear-gradient(135deg, hsl(var(--secondary-dark)), hsl(var(--accent)));
+    --gradient-farm: linear-gradient(120deg, hsl(var(--primary)), hsl(var(--accent)));
+
+    /* Shadows */
+    --shadow-card: 0 4px 20px hsl(var(--primary) / 0.1);
+    --shadow-voice: 0 0 25px hsl(var(--voice-pulse) / 0.4);
+    --shadow-soil: 0 8px 32px hsl(var(--secondary-dark) / 0.2);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    --background: 25 15% 8%;
+    --foreground: 42 100% 95%;
+
+    --card: 25 20% 12%;
+    --card-foreground: 42 100% 95%;
+
+    --popover: 25 20% 12%;
+    --popover-foreground: 42 100% 95%;
+
+    --primary: 120 50% 55%;
+    --primary-foreground: 25 15% 8%;
+    --primary-light: 120 45% 65%;
+
+    --secondary: 25 15% 18%;
+    --secondary-foreground: 42 100% 95%;
+    --secondary-dark: 25 25% 15%;
+
+    --muted: 25 10% 20%;
+    --muted-foreground: 25 15% 65%;
+
+    --accent: 35 70% 60%;
+    --accent-foreground: 25 15% 8%;
+
+    --border: 25 15% 22%;
+    --input: 25 15% 18%;
+    --ring: 120 50% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* Voice pulse animation */
+  @keyframes voice-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 0 0 hsl(var(--voice-pulse) / 0.7);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 0 20px hsl(var(--voice-pulse) / 0);
+      transform: scale(1.05);
+    }
+  }
+
+  .voice-pulse {
+    animation: voice-pulse 2s ease-in-out infinite;
+  }
+
+  /* Soil health indicators */
+  .soil-excellent { background: hsl(var(--soil-excellent)); }
+  .soil-good { background: hsl(var(--soil-good)); }
+  .soil-fair { background: hsl(var(--soil-fair)); }
+  .soil-poor { background: hsl(var(--soil-poor)); }
+
+  /* Custom gradients */
+  .gradient-primary { background: var(--gradient-primary); }
+  .gradient-earth { background: var(--gradient-earth); }
+  .gradient-soil { background: var(--gradient-soil); }
+  .gradient-farm { background: var(--gradient-farm); }
+}
