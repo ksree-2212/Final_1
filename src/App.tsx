@@ -84,16 +84,28 @@ const SmartAgricultureApp = () => {
     setCurrentStep('dashboard');
   };
 
+  const handleBackToLanguage = () => {
+    localStorage.removeItem('smartAgriLanguage');
+    localStorage.removeItem('smartAgriUser');
+    setSelectedLanguage('');
+    setUserData(null);
+    setCurrentStep('language');
+  };
+
+  const handleBackToWelcome = () => {
+    setCurrentStep('welcome');
+  };
+
   if (currentStep === 'language') {
     return <LanguageSelector onLanguageSelect={handleLanguageSelect} />;
   }
 
   if (currentStep === 'welcome') {
-    return <WelcomePage onContinue={handleWelcomeContinue} />;
+    return <WelcomePage onContinue={handleWelcomeContinue} onBackToLanguage={handleBackToLanguage} />;
   }
 
   if (currentStep === 'login') {
-    return <LoginPage onLogin={handleLogin} onCreateAccount={handleCreateAccount} />;
+    return <LoginPage onLogin={handleLogin} onCreateAccount={handleCreateAccount} onBack={handleBackToWelcome} />;
   }
 
   if (currentStep === 'createAccount') {
@@ -125,7 +137,7 @@ const SmartAgricultureApp = () => {
   }
 
   if (currentStep === 'dashboard') {
-    return <Dashboard onNavigate={handleNavigate} />;
+    return <Dashboard onNavigate={handleNavigate} onBackToLanguage={handleBackToLanguage} />;
   }
 
   return null;

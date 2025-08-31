@@ -6,14 +6,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useVoice } from '@/hooks/useVoice';
-import { Sprout, User, Eye, EyeOff } from 'lucide-react';
+import { Sprout, User, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 interface LoginPageProps {
   onLogin: (userData: any) => void;
   onCreateAccount: () => void;
+  onBack: () => void;
 }
 
-export const LoginPage = ({ onLogin, onCreateAccount }: LoginPageProps) => {
+export const LoginPage = ({ onLogin, onCreateAccount, onBack }: LoginPageProps) => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { speak } = useVoice();
@@ -73,6 +74,16 @@ export const LoginPage = ({ onLogin, onCreateAccount }: LoginPageProps) => {
 
   return (
     <div className="min-h-screen gradient-earth flex items-center justify-center p-4">
+      {/* Back Button */}
+      <Button
+        variant="ghost"
+        onClick={onBack}
+        className="absolute top-4 left-4 h-12 w-12"
+        size="icon"
+      >
+        <ArrowLeft className="h-6 w-6" />
+      </Button>
+      
       <Card className="w-full max-w-md shadow-card">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 h-16 w-16 rounded-full gradient-primary flex items-center justify-center">

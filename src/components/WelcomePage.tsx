@@ -2,14 +2,15 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Sprout, Leaf, Sun, Droplets } from 'lucide-react';
+import { Sprout, Leaf, Sun, Droplets, ArrowLeft } from 'lucide-react';
 import { useVoice } from '@/hooks/useVoice';
 
 interface WelcomePageProps {
   onContinue: () => void;
+  onBackToLanguage: () => void;
 }
 
-export const WelcomePage = ({ onContinue }: WelcomePageProps) => {
+export const WelcomePage = ({ onContinue, onBackToLanguage }: WelcomePageProps) => {
   const { t } = useTranslation();
   const { speak } = useVoice();
 
@@ -29,6 +30,16 @@ export const WelcomePage = ({ onContinue }: WelcomePageProps) => {
 
   return (
     <div className="min-h-screen gradient-earth flex items-center justify-center p-4">
+      {/* Back to Language Button */}
+      <Button
+        variant="ghost"
+        onClick={onBackToLanguage}
+        className="absolute top-4 left-4 h-12 w-12"
+        size="icon"
+      >
+        <ArrowLeft className="h-6 w-6" />
+      </Button>
+      
       <Card className="w-full max-w-lg shadow-card">
         <CardContent className="p-8 text-center">
           {/* Animated Icons */}

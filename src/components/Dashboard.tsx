@@ -12,13 +12,16 @@ import {
   MapPin,
   Wifi,
   WifiOff,
-  TestTube
+  TestTube,
+  ArrowLeft,
+  Globe
 } from 'lucide-react';
 import { useVoice } from '@/hooks/useVoice';
 import { useState } from 'react';
 
 interface DashboardProps {
   onNavigate: (page: string) => void;
+  onBackToLanguage: () => void;
 }
 
 const dashboardItems = [
@@ -60,7 +63,7 @@ const dashboardItems = [
   }
 ];
 
-export const Dashboard = ({ onNavigate }: DashboardProps) => {
+export const Dashboard = ({ onNavigate, onBackToLanguage }: DashboardProps) => {
   const { t } = useTranslation();
   const { speak } = useVoice();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -91,11 +94,22 @@ export const Dashboard = ({ onNavigate }: DashboardProps) => {
                 </Badge>
               </div>
             </div>
-            <VoiceButton 
-              size="lg"
-              className="shadow-voice"
-              onClick={() => speak(t('welcome_farmer'))}
-            />
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onBackToLanguage}
+                className="h-10 w-10"
+                title="Change Language"
+              >
+                <Globe className="h-5 w-5" />
+              </Button>
+              <VoiceButton 
+                size="lg"
+                className="shadow-voice"
+                onClick={() => speak(t('welcome_farmer'))}
+              />
+            </div>
           </div>
         </div>
       </div>
