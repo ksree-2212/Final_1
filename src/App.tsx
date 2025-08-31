@@ -92,6 +92,14 @@ const SmartAgricultureApp = () => {
     setCurrentStep('language');
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('smartAgriLanguage');
+    localStorage.removeItem('smartAgriUser');
+    setSelectedLanguage('');
+    setUserData(null);
+    setCurrentStep('language');
+  };
+
   const handleBackToWelcome = () => {
     setCurrentStep('welcome');
   };
@@ -137,7 +145,7 @@ const SmartAgricultureApp = () => {
   }
 
   if (currentStep === 'dashboard') {
-    return <Dashboard onNavigate={handleNavigate} onBackToLanguage={handleBackToLanguage} />;
+    return <Dashboard onNavigate={handleNavigate} onBackToLanguage={handleBackToLanguage} onLogout={handleLogout} />;
   }
 
   return null;

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { VoiceButton } from '@/components/ui/voice-button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { 
   Sprout, 
   Wheat, 
@@ -14,7 +15,10 @@ import {
   WifiOff,
   TestTube,
   ArrowLeft,
-  Globe
+  Globe,
+  User,
+  LogOut,
+  Settings
 } from 'lucide-react';
 import { useVoice } from '@/hooks/useVoice';
 import { useState } from 'react';
@@ -22,6 +26,7 @@ import { useState } from 'react';
 interface DashboardProps {
   onNavigate: (page: string) => void;
   onBackToLanguage: () => void;
+  onLogout?: () => void;
 }
 
 const dashboardItems = [
@@ -63,7 +68,7 @@ const dashboardItems = [
   }
 ];
 
-export const Dashboard = ({ onNavigate, onBackToLanguage }: DashboardProps) => {
+export const Dashboard = ({ onNavigate, onBackToLanguage, onLogout }: DashboardProps) => {
   const { t } = useTranslation();
   const { speak } = useVoice();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -71,6 +76,11 @@ export const Dashboard = ({ onNavigate, onBackToLanguage }: DashboardProps) => {
   const handleItemClick = (key: string) => {
     speak(t(key));
     onNavigate(key);
+  };
+
+  const handleLogout = () => {
+    speak("Logging out. Goodbye!");
+    onLogout?.();
   };
 
   return (
@@ -104,6 +114,31 @@ export const Dashboard = ({ onNavigate, onBackToLanguage }: DashboardProps) => {
               >
                 <Globe className="h-5 w-5" />
               </Button>
+              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-10 w-10" title="Account">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem disabled className="cursor-default">
+                    <User className="mr-2 h-4 w-4" />
+                    farmer@demo.com
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={onBackToLanguage}>
+                    <Globe className="mr-2 h-4 w-4" />
+                    Change Language
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              
               <VoiceButton 
                 size="lg"
                 className="shadow-voice"
